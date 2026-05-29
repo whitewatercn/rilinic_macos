@@ -112,7 +112,6 @@ debug: $(DEPS_CHECK)
 .PHONY: sparkle copy-sparkle-framework
 
 $(SPARKLE_FRAMEWORK):
-	git submodule update --init --recursive Sparkle
 	$(MAKE) sparkle
 
 sparkle:

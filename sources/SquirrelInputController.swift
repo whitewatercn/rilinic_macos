@@ -253,9 +253,15 @@ final class SquirrelInputController: IMKInputController {
     let update = NSMenuItem(title: NSLocalizedString("Check for updates...", comment: "Menu item"), action: #selector(checkForUpdates), keyEquivalent: "")
     update.target = self
 
+    let rilinic = NSMenuItem(title: NSLocalizedString("Rilinic...", comment: "Menu item"), action: #selector(openRilinic), keyEquivalent: "")
+    rilinic.target = self
+
     let menu = NSMenu()
     menu.addItem(deploy)
     menu.addItem(sync)
+    menu.addItem(NSMenuItem.separator())
+    menu.addItem(rilinic)
+    menu.addItem(NSMenuItem.separator())
     menu.addItem(logDir)
     menu.addItem(setting)
     menu.addItem(wiki)
@@ -282,6 +288,10 @@ final class SquirrelInputController: IMKInputController {
 
   @objc func checkForUpdates() {
     NSApp.squirrelAppDelegate.checkForUpdates()
+  }
+
+  @objc func openRilinic() {
+    NSApp.squirrelAppDelegate.openRilinic()
   }
 
   @objc func openWiki() {

@@ -19,6 +19,7 @@ final class SquirrelApplicationDelegate: NSObject, NSApplicationDelegate, SPUSta
   var panel: SquirrelPanel?
   var enableNotifications = false
   let updateController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+  var rilinicController: RilinicWindowController?
   var supportsGentleScheduledUpdateReminders: Bool {
     true
   }
@@ -95,6 +96,21 @@ final class SquirrelApplicationDelegate: NSObject, NSApplicationDelegate, SPUSta
 
   func openWiki() {
     NSWorkspace.shared.open(Self.rimeWikiURL)
+  }
+
+  func openRilinic() {
+    if let existingController = rilinicController {
+      existingController.showWindow(nil)
+      existingController.window?.makeKeyAndOrderFront(nil)
+      return
+    }
+    let controller = RilinicWindowController()
+    rilinicController = controller
+    NotificationCenter.default.addObserver(forName: NSWindow.willCloseNotification, object: controller.window, queue: .main) { [weak self] _ in
+      self?.rilinicController = nil
+    }
+    controller.showWindow(nil)
+    controller.window?.makeKeyAndOrderFront(nil)
   }
 
   static func showMessage(msgText: String?) {
