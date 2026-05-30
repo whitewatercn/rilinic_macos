@@ -17,11 +17,9 @@
 │   └── rime-plugins/
 ├── bin/                      # 编译后放置 rime_deployer, rime_dict_manager 等工具
 ├── data/
-│   ├── plum/                 # Rime 输入方案数据（schema、词典等）
 │   └── opencc/              # OpenCC 简繁转换数据
 ├── Frameworks/               # Sparkle.framework
 ├── librime/                  # librime 源码与构建产物（通过 git submodule）
-├── plum/                     # plum 配置管理器（通过 git submodule）
 ├── Sparkle/                  # Sparkle 自动更新框架（通过 git submodule）
 ├── package/                  # 打包脚本
 │   ├── make_package          # 生成 .pkg 安装包
@@ -67,9 +65,9 @@ git submodule update --init --recursive
 | ------------------- | ------------------------------------------------------------------ |
 | `make` 或 `make release` | 构建 Release 版 `.app`（默认目标）                             |
 | `make debug`        | 构建 Debug 版 `.app`                                               |
-| `make deps`         | 构建所有依赖（librime + plum 数据 + OpenCC 数据）                  |
+| `make deps`         | 构建所有依赖（librime + OpenCC 数据）                              |
 | `make librime`      | 仅构建 librime 及其依赖                                            |
-| `make data`         | 仅构建 plum 和 OpenCC 数据                                         |
+| `make data`         | 仅构建 OpenCC 数据                                                 |
 | `make package`      | 构建 Release 版并打包为 `.pkg`                                     |
 | `make archive`      | 打包并生成发布归档与 Sparkle appcast                                |
 | `make install-release` | 构建 Release 并安装到 `/Library/Input Methods`                   |
@@ -109,8 +107,7 @@ make deps
    - `rime-plugins/` → `lib/rime-plugins/`
    - `rime_deployer`、`rime_dict_manager` → `bin/`
    - 使用 `install_name_tool` 为二进制设置 rpath 为 `@loader_path/../Frameworks`
-3. **下载 plum 数据**：通过 `plum/rime-install` 获取默认输入方案
-4. **复制 OpenCC 数据**：简繁转换词典 → `data/opencc/`
+3. **复制 OpenCC 数据**：简繁转换词典 → `data/opencc/`
 
 #### 方式二：使用预编译依赖（CI / 快速构建）
 
@@ -133,7 +130,7 @@ make release
 等价于：
 
 ```bash
-# 1. 动态注入数据文件到 Xcode 项目
+# 1. 动态注入 Rime 插件到 Xcode 项目
 bash package/add_data_files
 
 # 2. Xcode 命令行构建
@@ -145,8 +142,7 @@ xcodebuild \
   build
 ```
 
-**`add_data_files` 的作用**：将 `data/plum/` 下的输入方案文件（schema.yaml、词典等）
-和 `lib/rime-plugins/` 下的插件动态库自动注册到 Xcode 项目文件 (`project.pbxproj`) 中，
+**`add_data_files` 的作用**：将 `lib/rime-plugins/` 下的插件动态库自动注册到 Xcode 项目文件 (`project.pbxproj`) 中，
 确保它们在 Xcode 的 Copy Files Phase 被复制到 `.app` 包内。
 
 构建产物位于：
@@ -156,13 +152,12 @@ build/Build/Products/Release/Squirrel.app/
 ├── Contents/
 │   ├── MacOS/
 │   │   ├── Squirrel          # 主程序
-│   │   ├── rime-install      # Rime 配置安装器
 │   │   ├── rime_deployer     # Rime 部署工具
 │   │   └── rime_dict_manager # Rime 词典管理工具
 │   ├── Frameworks/
 │   │   └── Sparkle.framework # 自动更新框架
 │   ├── Resources/
-│   └── SharedSupport/        # 输入方案数据
+│   └── SharedSupport/        # 内置共享数据
 │       └── ...
 ```
 
@@ -292,6 +287,9 @@ make archive
    - 注册输入法：`Squirrel --register-input-source`
    - 预编译 Rime 配置：`Squirrel --build`
    - 为当前用户启用并切换到该输入法
+
+词库和配置文件更新由应用内「医键通」入口管理。该入口登录后从云端 OSS 获取 `rilinic/`
+文件列表，下载选中的文件，并部署到当前用户的 `~/Library/Rime`。
 
 ## 本地开发安装
 

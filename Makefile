@@ -14,21 +14,14 @@ RIME_DEPS = librime/lib/libmarisa.a \
 	librime/lib/libleveldb.a \
 	librime/lib/libopencc.a \
 	librime/lib/libyaml-cpp.a
-PLUM_DATA = bin/rime-install \
-	data/plum/default.yaml \
-	data/plum/symbols.yaml \
-	data/plum/essay.txt
 OPENCC_DATA = data/opencc/TSCharacters.ocd2 \
 	data/opencc/TSPhrases.ocd2 \
 	data/opencc/t2s.json
 SPARKLE_FRAMEWORK = Frameworks/Sparkle.framework
 PACKAGE = package/Squirrel.pkg
-DEPS_CHECK = $(RIME_LIBRARY) $(PLUM_DATA) $(OPENCC_DATA) $(SPARKLE_FRAMEWORK)
+DEPS_CHECK = $(RIME_LIBRARY) $(OPENCC_DATA) $(SPARKLE_FRAMEWORK)
 
 OPENCC_DATA_OUTPUT = librime/share/opencc/*.*
-PLUM_DATA_OUTPUT = plum/output/*.*
-PLUM_OPENCC_OUTPUT = plum/output/opencc/*.*
-RIME_PACKAGE_INSTALLER = plum/rime-install
 
 INSTALL_NAME_TOOL = $(shell xcrun -find install_name_tool)
 INSTALL_NAME_TOOL_ARGS = -add_rpath @loader_path/../Frameworks
@@ -53,36 +46,20 @@ copy-rime-binaries:
 	$(INSTALL_NAME_TOOL) $(INSTALL_NAME_TOOL_ARGS) bin/rime_deployer
 	$(INSTALL_NAME_TOOL) $(INSTALL_NAME_TOOL_ARGS) bin/rime_dict_manager
 
-.PHONY: data plum-data opencc-data copy-plum-data copy-opencc-data
+.PHONY: data opencc-data copy-opencc-data
 
-data: plum-data opencc-data
-
-$(PLUM_DATA):
-	$(MAKE) plum-data
+data: opencc-data
 
 $(OPENCC_DATA):
 	$(MAKE) opencc-data
-
-plum-data:
-	$(MAKE) -C plum
-ifdef PLUM_TAG
-	rime_dir=plum/output bash plum/rime-install $(PLUM_TAG)
-endif
-	$(MAKE) copy-plum-data
 
 opencc-data:
 	$(MAKE) -C librime deps/opencc
 	$(MAKE) copy-opencc-data
 
-copy-plum-data:
-	mkdir -p data/plum
-	cp $(PLUM_DATA_OUTPUT) data/plum/
-	cp $(RIME_PACKAGE_INSTALLER) bin/
-
 copy-opencc-data:
 	mkdir -p data/opencc
 	cp $(OPENCC_DATA_OUTPUT) data/opencc/
-	cp $(PLUM_OPENCC_OUTPUT) data/opencc/ > /dev/null 2>&1 || true
 
 deps: librime data
 
@@ -180,7 +157,6 @@ clean:
 	rm bin/* > /dev/null 2>&1 || true
 	rm lib/* > /dev/null 2>&1 || true
 	rm lib/rime-plugins/* > /dev/null 2>&1 || true
-	rm data/plum/* > /dev/null 2>&1 || true
 	rm data/opencc/* > /dev/null 2>&1 || true
 
 clean-package:
@@ -189,7 +165,6 @@ clean-package:
 	rm -rf package/sign_update > /dev/null 2>&1 || true
 
 clean-deps:
-	$(MAKE) -C plum clean
 	$(MAKE) -C librime clean
 	rm -rf librime/dist > /dev/null 2>&1 || true
 	$(MAKE) clean-sparkle

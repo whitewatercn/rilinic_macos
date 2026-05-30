@@ -106,7 +106,6 @@ git submodule update --init --recursive
 export BOOST_ROOT="path_to_boost" # required
 export DEV_ID="Your Apple ID name" # include this to codesign, optional
 export BUILD_UNIVERSAL=1 # set to build universal binary
-export PLUM_TAG=":preset” # or ":extra", optional, build with a set of plum formulae
 export ARCHS='arm64 x86_64' # optional, if not defined, only active arch is used
 export MACOSX_DEPLOYMENT_TARGET='13.0' # optional, lower version than 13.0 is not tested and may not work properly
 ```
@@ -167,7 +166,7 @@ To clean **Squirrel** artifacts, without touching dependencies, run:
 make clean
 ```
 
-To clean up **dependencies**, including librime, librime plugins, plum and sparkle, run:
+To clean up **dependencies**, including librime, librime plugins and sparkle, run:
 
 ``` sh
 make clean-deps

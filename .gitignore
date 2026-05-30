@@ -8,7 +8,6 @@ Frameworks/*
 bin/*
 lib/*
 data/opencc/
-data/plum/
 download/
 package/Squirrel*.pkg
 package/sign/*.pem

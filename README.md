@@ -48,10 +48,10 @@
   * 選中「在線文檔」可打開以上網址
   * 編輯用戶設定後，選擇「重新部署」以令修改生效
 
-安裝輸入方案
+配置管理
 ---
 
-使用 [/plum/](https://github.com/rime/plum) 配置管理器獲取更多輸入方案。
+使用輸入法菜單中的「医键通」入口登录并获取云端词库、配置文件更新。
 
 致謝
 ---
@@ -89,7 +89,6 @@
   * LevelDB  (New BSD License)
   * librime  (New BSD License)
   * OpenCC / 開放中文轉換  (Apache License 2.0)
-  * plum / 東風破 (GNU Lesser General Public License 3.0)
   * Sparkle  (MIT License)
   * UTF8-CPP  (Boost Software License)
   * yaml-cpp  (MIT License)
