@@ -1,36 +1,76 @@
-    鼠鬚管
-    爲物雖微情不淺
-    新詩醉墨時一揮
-    別後寄我無辭遠
+由　[中州韻輸入法引擎／Rime Input Method Engine](https://rime.im)
+基于 [squirrel](https://github.com/rime/squirrel) 二次开发
 
-    　　　——歐陽修
-
-今由　[中州韻輸入法引擎／Rime Input Method Engine](https://rime.im)
-及其他開源技術強力驅動
-
-【鼠鬚管】輸入法
-===
-[![Download](https://img.shields.io/github/v/release/rime/squirrel)](https://github.com/rime/squirrel/releases/latest)
-[![Build Status](https://github.com/rime/squirrel/actions/workflows/commit-ci.yml/badge.svg)](https://github.com/rime/squirrel/actions/workflows)
-[![GitHub Tag](https://img.shields.io/github/tag/rime/squirrel.svg)](https://github.com/rime/squirrel)
-
-式恕堂 版權所無
-
-授權條款：[GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html)
-
-項目主頁：[rime.im](https://rime.im)
-
-您可能還需要 Rime 用於其他操作系統的發行版：
-
-  * 【中州韻】（ibus-rime、fcitx-rime）用於 Linux
-  * 【小狼毫】用於 Windows
-
-安裝輸入法
+# 如何打包 pkg
 ---
 
-本品適用於 macOS 13.0+
+本項目通過 `Makefile` 生成 macOS 安裝包，輸出文件爲 `package/rilinic.pkg`。
 
-初次安裝，如果在部份應用程序中打不出字，請註銷並重新登錄。
+### 1. 準備依賴
+
+首次打包前，先拉取或生成 librime、Sparkle 等依賴。一般使用預編譯依賴最快：
+
+```bash
+./action-install.sh
+```
+
+如果需要從源碼編譯依賴：
+
+```bash
+make deps
+```
+
+### 2. 生成本地測試 pkg
+
+```bash
+make clean-package
+make package
+```
+
+這會先構建 Release 版 `rilinic.app`，再調用 `package/make_package` 使用 `pkgbuild` 打包。
+生成結果：
+
+```text
+package/rilinic.pkg
+```
+
+本地安裝測試：
+
+```bash
+sudo installer -pkg package/rilinic.pkg -target /
+```
+
+安裝位置是：
+
+```text
+/Library/Input Methods/rilinic.app
+```
+
+### 3. 生成正式簽名與公證 pkg
+
+正式分發時需要 Developer ID。`DEV_ID` 應與鑰匙串中的簽名身份及 `notarytool` profile 名稱一致：
+
+```bash
+make clean-package
+make package DEV_ID="Your Developer ID"
+```
+
+該流程會依次執行：
+
+1. 構建 Release 版 `rilinic.app`
+2. 使用 `Developer ID Application` 簽名 `.app`
+3. 使用 `pkgbuild` 生成 `package/rilinic.pkg`
+4. 使用 `Developer ID Installer` 簽名 `.pkg`
+5. 使用 `xcrun notarytool submit` 提交公證
+6. 使用 `xcrun stapler staple` 裝訂公證票據
+
+如需生成帶版本號的發布包和 Sparkle appcast：
+
+```bash
+make archive DEV_ID="Your Developer ID"
+```
+
+發布歸檔會在 `package/` 下生成類似 `rilinic-<版本號>.pkg` 的文件。
 
 使用輸入法
 ---
