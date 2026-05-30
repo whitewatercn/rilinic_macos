@@ -253,7 +253,7 @@ final class SquirrelInputController: IMKInputController {
     let update = NSMenuItem(title: NSLocalizedString("Check for updates...", comment: "Menu item"), action: #selector(checkForUpdates), keyEquivalent: "")
     update.target = self
 
-    let rilinic = NSMenuItem(title: NSLocalizedString("Rilinic...", comment: "Menu item"), action: #selector(openRilinic), keyEquivalent: "")
+    let rilinic = NSMenuItem(title: NSLocalizedString("Preferences...", comment: "Menu item"), action: #selector(openRilinic), keyEquivalent: "")
     rilinic.target = self
 
     let menu = NSMenu()

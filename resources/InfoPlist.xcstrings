@@ -7,19 +7,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Squirrel"
+            "value" : "rilinic"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠须管"
+            "value" : "rilinic"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠鬚管"
+            "value" : "rilinic"
           }
         }
       }
@@ -31,88 +31,88 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Squirrel"
+            "value" : "rilinic"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠须管"
+            "value" : "rilinic"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠鬚管"
+            "value" : "rilinic"
           }
         }
       }
     },
-    "im.rime.inputmethod.Squirrel" : {
+    "com.rilinic.inputmethod.rilinic" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Squirrel"
+            "value" : "rilinic"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠须管"
+            "value" : "rilinic"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠鬚管"
+            "value" : "rilinic"
           }
         }
       }
     },
-    "im.rime.inputmethod.Squirrel.Hans" : {
+    "com.rilinic.inputmethod.rilinic.Hans" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Squirrel - Simplified"
+            "value" : "rilinic - Simplified"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠须管"
+            "value" : "rilinic - Simplified"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠须管"
+            "value" : "rilinic - Simplified"
           }
         }
       }
     },
-    "im.rime.inputmethod.Squirrel.Hant" : {
+    "com.rilinic.inputmethod.rilinic.Hant" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Squirrel - Traditional"
+            "value" : "rilinic - Traditional"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠鬚管"
+            "value" : "rilinic - Traditional"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠鬚管"
+            "value" : "rilinic - Traditional"
           }
         }
       }

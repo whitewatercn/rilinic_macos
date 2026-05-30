@@ -101,7 +101,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Squirrel is ready."
+            "value" : "rilinic is ready."
           }
         },
         "zh-Hans" : {
@@ -157,6 +157,23 @@
         }
       }
     },
+    "Preferences..." : {
+      "comment" : "Menu item",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "偏好设置..."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "偏好設定..."
+          }
+        }
+      }
+    },
     "Rime Wiki..." : {
       "comment" : "Menu item",
       "localizations" : {
@@ -191,19 +208,19 @@
         }
       }
     },
-    "Squirrel" : {
+    "rilinic" : {
       "comment" : "Menu title",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠须管"
+            "value" : "rilinic"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鼠鬚管"
+            "value" : "rilinic"
           }
         }
       }

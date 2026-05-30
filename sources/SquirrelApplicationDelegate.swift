@@ -20,6 +20,7 @@ final class SquirrelApplicationDelegate: NSObject, NSApplicationDelegate, SPUSta
   var enableNotifications = false
   let updateController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
   var rilinicController: RilinicWindowController?
+  private var rilinicCloseObserver: NSObjectProtocol?
   var supportsGentleScheduledUpdateReminders: Bool {
     true
   }
@@ -98,19 +99,42 @@ final class SquirrelApplicationDelegate: NSObject, NSApplicationDelegate, SPUSta
     NSWorkspace.shared.open(Self.rimeWikiURL)
   }
 
-  func openRilinic() {
-    if let existingController = rilinicController {
-      existingController.showWindow(nil)
-      existingController.window?.makeKeyAndOrderFront(nil)
-      return
+  @objc func openRilinic() {
+    DispatchQueue.main.async {
+      if let existingController = self.rilinicController {
+        self.showRilinicPreferences(existingController)
+        return
+      }
+
+      let controller = RilinicWindowController()
+      self.rilinicController = controller
+      self.rilinicCloseObserver = NotificationCenter.default.addObserver(
+        forName: NSWindow.willCloseNotification,
+        object: controller.window,
+        queue: .main
+      ) { [weak self] _ in
+        guard let self = self else { return }
+        if let observer = self.rilinicCloseObserver {
+          NotificationCenter.default.removeObserver(observer)
+          self.rilinicCloseObserver = nil
+        }
+        self.rilinicController = nil
+        NSApp.setActivationPolicy(.accessory)
+      }
+
+      self.showRilinicPreferences(controller)
     }
-    let controller = RilinicWindowController()
-    rilinicController = controller
-    NotificationCenter.default.addObserver(forName: NSWindow.willCloseNotification, object: controller.window, queue: .main) { [weak self] _ in
-      self?.rilinicController = nil
-    }
+  }
+
+  private func showRilinicPreferences(_ controller: RilinicWindowController) {
+    NSApp.setActivationPolicy(.regular)
+    NSApp.activate(ignoringOtherApps: true)
+
     controller.showWindow(nil)
-    controller.window?.makeKeyAndOrderFront(nil)
+    guard let window = controller.window else { return }
+    window.collectionBehavior.insert(.moveToActiveSpace)
+    window.makeKeyAndOrderFront(nil)
+    window.orderFrontRegardless()
   }
 
   static func showMessage(msgText: String?) {
@@ -123,7 +147,7 @@ final class SquirrelApplicationDelegate: NSObject, NSApplicationDelegate, SPUSta
     center.getNotificationSettings { settings in
       if (settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional) && settings.alertSetting == .enabled {
         let content = UNMutableNotificationContent()
-        content.title = NSLocalizedString("Squirrel", comment: "")
+        content.title = NSLocalizedString("rilinic", comment: "")
         if let msgText = msgText {
           content.subtitle = msgText
         }
@@ -151,10 +175,10 @@ final class SquirrelApplicationDelegate: NSObject, NSApplicationDelegate, SPUSta
     squirrelTraits.setCString(Bundle.main.sharedSupportPath!, to: \.shared_data_dir)
     squirrelTraits.setCString(SquirrelApp.userDir.path(), to: \.user_data_dir)
     squirrelTraits.setCString(SquirrelApp.logDir.path(), to: \.log_dir)
-    squirrelTraits.setCString("Squirrel", to: \.distribution_code_name)
-    squirrelTraits.setCString("鼠鬚管", to: \.distribution_name)
+    squirrelTraits.setCString("rilinic", to: \.distribution_code_name)
+    squirrelTraits.setCString("rilinic", to: \.distribution_name)
     squirrelTraits.setCString(Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String, to: \.distribution_version)
-    squirrelTraits.setCString("rime.squirrel", to: \.app_name)
+    squirrelTraits.setCString("rime.rilinic", to: \.app_name)
     rimeAPI.setup(&squirrelTraits)
   }
 

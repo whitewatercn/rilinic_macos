@@ -60,7 +60,6 @@
 		B397712F2BEECBED0093A49B /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B397712E2BEECBED0093A49B /* Main.swift */; };
 		B39771312BEEE4540093A49B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B39771302BEEE4540093A49B /* InfoPlist.xcstrings */; };
 		B39771332BEEE4540093A49B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B39771322BEEE4540093A49B /* Localizable.xcstrings */; };
-		B3EF08EA2F17125E00433A45 /* Rime.icon in Resources */ = {isa = PBXBuildFile; fileRef = B3EF08E92F17125E00433A45 /* Rime.icon */; };
 		D26434552706A15100857391 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D26434542706A15100857391 /* QuartzCore.framework */; };
 		E93074B70A5C264700470842 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93074B60A5C264700470842 /* InputMethodKit.framework */; };
 		F45E005F2B8CA81C00179B75 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45E005E2B8CA81C00179B75 /* UserNotifications.framework */; };
@@ -176,7 +175,7 @@
 		44CD640915E2633D0021234E /* librime.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = librime.1.dylib; path = lib/librime.1.dylib; sourceTree = "<group>"; };
 		44E21A8E16A653E700C2B08F /* rime_deployer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = rime_deployer; path = bin/rime_deployer; sourceTree = "<group>"; };
 		44E21A8F16A653E700C2B08F /* rime_dict_manager */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = rime_dict_manager; path = bin/rime_dict_manager; sourceTree = "<group>"; };
-		44F1EB381431F8270015FD04 /* Squirrel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Squirrel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		44F1EB381431F8270015FD04 /* rilinic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rilinic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77AA67DC2588916300A592E2 /* HKVariants.ocd2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = HKVariants.ocd2; sourceTree = "<group>"; };
 		77AA67DD2588916300A592E2 /* t2s.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = t2s.json; sourceTree = "<group>"; };
 		77AA67DE2588916300A592E2 /* t2tw.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = t2tw.json; sourceTree = "<group>"; };
@@ -299,7 +298,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				44F1EB381431F8270015FD04 /* Squirrel.app */,
+				44F1EB381431F8270015FD04 /* rilinic.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -427,8 +426,8 @@
 			packageProductDependencies = (
 			);
 			productInstallPath = "$(HOME)/Applications";
-			productName = Squirrel;
-			productReference = 44F1EB381431F8270015FD04 /* Squirrel.app */;
+			productName = rilinic;
+			productReference = 44F1EB381431F8270015FD04 /* rilinic.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -472,7 +471,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				446C01D71F767BD400A6C23E /* Assets.xcassets in Resources */,
-				B3EF08EA2F17125E00433A45 /* Rime.icon in Resources */,
 				B39771312BEEE4540093A49B /* InfoPlist.xcstrings in Resources */,
 				44986A95184B421700B3278D /* LICENSE.txt in Resources */,
 				B39771332BEEE4540093A49B /* Localizable.xcstrings in Resources */,
@@ -537,7 +535,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Squirrel Input Method";
+				INFOPLIST_KEY_CFBundleDisplayName = rilinic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INSTALL_PATH = "\"/Library/Input Methods\"";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -557,8 +555,9 @@
 					"$(OTHER_CPLUSPLUSFLAGS_QUOTED_FOR_TARGET_2)",
 				);
 				OTHER_LDFLAGS = "-lrime.1";
-				PRODUCT_BUNDLE_IDENTIFIER = im.rime.inputmethod.Squirrel;
-				PRODUCT_NAME = Squirrel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rilinic.inputmethod.rilinic;
+				PRODUCT_MODULE_NAME = Squirrel;
+				PRODUCT_NAME = rilinic;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "sources/Squirrel-Bridging-Header.h";
@@ -592,7 +591,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Squirrel Input Method";
+				INFOPLIST_KEY_CFBundleDisplayName = rilinic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INSTALL_PATH = "\"/Library/Input Methods\"";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -612,8 +611,9 @@
 					"$(OTHER_CPLUSPLUSFLAGS_QUOTED_FOR_TARGET_2)",
 				);
 				OTHER_LDFLAGS = "-lrime.1";
-				PRODUCT_BUNDLE_IDENTIFIER = im.rime.inputmethod.Squirrel;
-				PRODUCT_NAME = Squirrel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rilinic.inputmethod.rilinic;
+				PRODUCT_MODULE_NAME = Squirrel;
+				PRODUCT_NAME = rilinic;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "sources/Squirrel-Bridging-Header.h";

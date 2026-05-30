@@ -18,7 +18,7 @@ OPENCC_DATA = data/opencc/TSCharacters.ocd2 \
 	data/opencc/TSPhrases.ocd2 \
 	data/opencc/t2s.json
 SPARKLE_FRAMEWORK = Frameworks/Sparkle.framework
-PACKAGE = package/Squirrel.pkg
+PACKAGE = package/rilinic.pkg
 DEPS_CHECK = $(RIME_LIBRARY) $(OPENCC_DATA) $(SPARKLE_FRAMEWORK)
 
 OPENCC_DATA_OUTPUT = librime/share/opencc/*.*
@@ -119,11 +119,11 @@ ifdef DEV_ID
 endif
 	bash package/make_package "$(DERIVED_DATA_PATH)"
 ifdef DEV_ID
-	productsign --sign "Developer ID Installer: $(DEV_ID)" package/Squirrel.pkg package/Squirrel-signed.pkg
-	rm package/Squirrel.pkg
-	mv package/Squirrel-signed.pkg package/Squirrel.pkg
-	xcrun notarytool submit package/Squirrel.pkg --keychain-profile "$(DEV_ID)" --wait
-	xcrun stapler staple package/Squirrel.pkg
+	productsign --sign "Developer ID Installer: $(DEV_ID)" package/rilinic.pkg package/rilinic-signed.pkg
+	rm package/rilinic.pkg
+	mv package/rilinic-signed.pkg package/rilinic.pkg
+	xcrun notarytool submit package/rilinic.pkg --keychain-profile "$(DEV_ID)" --wait
+	xcrun stapler staple package/rilinic.pkg
 endif
 
 package: release $(PACKAGE)
@@ -132,21 +132,21 @@ archive: package package/sign_update
 	bash package/make_archive
 
 DSTROOT = /Library/Input Methods
-SQUIRREL_APP_ROOT = $(DSTROOT)/Squirrel.app
+RILINIC_APP_ROOT = $(DSTROOT)/rilinic.app
 
 .PHONY: permission-check install-debug install-release
 
 permission-check:
-	[ -w "$(DSTROOT)" ] && [ -w "$(SQUIRREL_APP_ROOT)" ] || sudo chown -R ${USER} "$(DSTROOT)"
+	[ -w "$(DSTROOT)" ] && [ -w "$(RILINIC_APP_ROOT)" ] || sudo chown -R ${USER} "$(DSTROOT)"
 
 install-debug: debug permission-check
-	rm -rf "$(SQUIRREL_APP_ROOT)"
-	cp -R $(DERIVED_DATA_PATH)/Build/Products/Debug/Squirrel.app "$(DSTROOT)"
+	rm -rf "$(RILINIC_APP_ROOT)"
+	cp -R $(DERIVED_DATA_PATH)/Build/Products/Debug/rilinic.app "$(DSTROOT)"
 	DSTROOT="$(DSTROOT)" RIME_NO_PREBUILD=1 bash scripts/postinstall
 
 install-release: release permission-check
-	rm -rf "$(SQUIRREL_APP_ROOT)"
-	cp -R $(DERIVED_DATA_PATH)/Build/Products/Release/Squirrel.app "$(DSTROOT)"
+	rm -rf "$(RILINIC_APP_ROOT)"
+	cp -R $(DERIVED_DATA_PATH)/Build/Products/Release/rilinic.app "$(DSTROOT)"
 	DSTROOT="$(DSTROOT)" bash scripts/postinstall
 
 .PHONY: clean clean-deps

@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>TISInputSourceID</key>
-	<string>im.rime.inputmethod.Squirrel</string>
+	<string>com.rilinic.inputmethod.rilinic</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>Squirrel</string>
+	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
 	<string>RimeIcon.icns</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Squirrel</string>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundleDisplayName</key>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
@@ -26,10 +28,10 @@
 	<dict>
 		<key>tsInputModeListKey</key>
 		<dict>
-			<key>im.rime.inputmethod.Squirrel.Hans</key>
+			<key>com.rilinic.inputmethod.rilinic.Hans</key>
 			<dict>
 				<key>TISInputSourceID</key>
-				<string>im.rime.inputmethod.Squirrel.Hans</string>
+				<string>com.rilinic.inputmethod.rilinic.Hans</string>
 				<key>TISIntendedLanguage</key>
 				<string>zh-Hans</string>
 				<key>tsInputModeAlternateMenuIconFileKey</key>
@@ -54,10 +56,10 @@
 				<key>tsInputModeScriptKey</key>
 				<string>smUnicodeScript</string>
 			</dict>
-			<key>im.rime.inputmethod.Squirrel.Hant</key>
+			<key>com.rilinic.inputmethod.rilinic.Hant</key>
 			<dict>
 				<key>TISInputSourceID</key>
-				<string>im.rime.inputmethod.Squirrel.Hant</string>
+				<string>com.rilinic.inputmethod.rilinic.Hant</string>
 				<key>TISIntendedLanguage</key>
 				<string>zh-Hant</string>
 				<key>tsInputModeAlternateMenuIconFileKey</key>
@@ -85,12 +87,12 @@
 		</dict>
 		<key>tsVisibleInputModeOrderedArrayKey</key>
 		<array>
-			<string>im.rime.inputmethod.Squirrel.Hans</string>
-			<string>im.rime.inputmethod.Squirrel.Hant</string>
+			<string>com.rilinic.inputmethod.rilinic.Hans</string>
+			<string>com.rilinic.inputmethod.rilinic.Hant</string>
 		</array>
 	</dict>
 	<key>InputMethodConnectionName</key>
-	<string>Squirrel_Connection</string>
+	<string>rilinic_Connection</string>
 	<key>InputMethodServerControllerClass</key>
 	<string>Squirrel.SquirrelInputController</string>
 	<key>InputMethodServerDelegateClass</key>
@@ -102,7 +104,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUEnableAutomaticChecks</key>
-	<true/>
+	<false/>
 	<key>SUFeedURL</key>
 	<string>https://rime.github.io/release/squirrel/appcast.xml</string>
 	<key>SUPublicEDKey</key>

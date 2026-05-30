@@ -15,10 +15,10 @@ struct SquirrelApp {
   } else {
     try! FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("Rime", isDirectory: true)
   }
-  static let appDir = "/Library/Input Library/Squirrel.app".withCString { dir in
+  static let appDir = "/Library/Input Methods/rilinic.app".withCString { dir in
     URL(fileURLWithFileSystemRepresentation: dir, isDirectory: false, relativeTo: nil)
   }
-  static let logDir = FileManager.default.temporaryDirectory.appending(component: "rime.squirrel", directoryHint: .isDirectory)
+  static let logDir = FileManager.default.temporaryDirectory.appending(component: "rime.rilinic", directoryHint: .isDirectory)
 
   // swiftlint:disable:next cyclomatic_complexity
   static func main() {
@@ -72,7 +72,7 @@ struct SquirrelApp {
           SquirrelApplicationDelegate.showMessage(msgText: NSLocalizedString("deploy_update", comment: ""))
           // Build all schemas in current directory
           var builderTraits = RimeTraits.rimeStructInit()
-          builderTraits.setCString("rime.squirrel-builder", to: \.app_name)
+          builderTraits.setCString("rime.rilinic-builder", to: \.app_name)
           rimeAPI.setup(&builderTraits)
           rimeAPI.deployer_initialize(nil)
           _ = rimeAPI.deploy()
@@ -110,7 +110,7 @@ struct SquirrelApp {
 
       if NSApp.squirrelAppDelegate.problematicLaunchDetected() {
         print("Problematic launch detected!")
-        let args = ["Problematic launch detected! Squirrel may be suffering a crash due to improper configuration. Revert previous modifications to see if the problem recurs."]
+        let args = ["Problematic launch detected! rilinic may be suffering a crash due to improper configuration. Revert previous modifications to see if the problem recurs."]
         let task = Process()
         task.executableURL = "/usr/bin/say".withCString { dir in
           URL(fileURLWithFileSystemRepresentation: dir, isDirectory: false, relativeTo: nil)
@@ -121,12 +121,12 @@ struct SquirrelApp {
         NSApp.squirrelAppDelegate.setupRime()
         NSApp.squirrelAppDelegate.startRime(fullCheck: false)
         NSApp.squirrelAppDelegate.loadSettings()
-        print("Squirrel reporting!")
+        print("rilinic reporting!")
       }
 
       // finally run everything
       app.run()
-      print("Squirrel is quitting...")
+      print("rilinic is quitting...")
       rimeAPI.finalize()
     }
     return
@@ -135,11 +135,11 @@ struct SquirrelApp {
   static let helpDoc = """
 Supported arguments:
 Perform actions:
-  --quit                     quit all Squirrel process
+  --quit                     quit all rilinic process
   --reload                   deploy
   --sync                     sync user data
   --build                    build all schemas in current directory
-Install Squirrel:
+Install rilinic:
   --install, --register-input-source    register input source
   --enable-input-source [source id...]  input source list optional
   --disable-input-source [source id...] input source list optional
